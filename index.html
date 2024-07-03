@@ -14,8 +14,10 @@
 </head>
 <body>
     <div id="viewer-container"></div>
-    <script src="https://unpkg.com/three/build/three.min.js"></script>
-    <script src="https://unpkg.com/ifcjs/build/IFC.min.js"></script>
+    <!-- Three.jsライブラリをCDNから読み込み -->
+    <script src="https://unpkg.com/three@0.127.0/build/three.min.js"></script>
+    <!-- IFC.jsライブラリをCDNから読み込み -->
+    <script src="https://unpkg.com/ifcjs@latest/build/IFC.min.js"></script>
     <script>
         // IFC.jsライブラリを使用してIFCファイルを表示するコード
         async function loadIFC(url) {
@@ -44,7 +46,7 @@
         }
 
         // S3バケットのIFCファイルのURLを指定
-        const ifcURL = 'https://iotw-bucket.s3.ap-southeast-2.amazonaws.com/kikaishitsu.ifc';
+        const ifcURL = 'https://YOUR_BUCKET_NAME.s3.amazonaws.com/yourfile.ifc';
         loadIFC(ifcURL);
     </script>
 </body>
