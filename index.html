@@ -2,8 +2,50 @@
 <html>
 <head>
     <title>IFC Viewer</title>
+    <style>
+        #viewer-container {
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, IFC Viewer!</h1>
+    <div id="viewer-container"></div>
+    <script src="https://unpkg.com/three/build/three.min.js"></script>
+    <script src="https://unpkg.com/ifcjs/build/IFC.min.js"></script>
+    <script>
+        // IFC.jsライブラリを使用してIFCファイルを表示するコード
+        async function loadIFC(url) {
+            const container = document.getElementById('viewer-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const light = new THREE.HemisphereLight(0xffffff, 0x080820, 1);
+            scene.add(light);
+
+            const loader = new IFCLoader();
+            const model = await loader.loadAsync(url);
+            scene.add(model);
+
+            camera.position.z = 10;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                renderer.render(scene, camera);
+            }
+
+            animate();
+        }
+
+        // S3バケットのIFCファイルのURLを指定
+        const ifcURL = 'https://iotw-bucket.s3.ap-southeast-2.amazonaws.com/kikaishitsu.ifc';
+        loadIFC(ifcURL);
+    </script>
 </body>
 </html>
