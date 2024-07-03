@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFC Viewer</title>
+    <!-- スタイルシートやその他のスクリプトをここに追加 -->
     <style>
         #viewer-container {
             width: 100%;
@@ -13,13 +16,17 @@
     </style>
 </head>
 <body>
+    <!-- IFCモデルを表示するコンテナ -->
     <div id="viewer-container"></div>
-    <!-- Three.jsライブラリをCDNから読み込み -->
+
+    <!-- Three.jsライブラリのCDNを追加 -->
     <script src="https://unpkg.com/three@0.127.0/build/three.min.js"></script>
-    <!-- IFC.jsライブラリをCDNから読み込み -->
+    <!-- IFC.jsライブラリのCDNを追加 -->
     <script src="https://unpkg.com/ifcjs@latest/build/IFC.min.js"></script>
+
+    <!-- 自作のJavaScriptコードを追加 -->
     <script>
-        // IFC.jsライブラリを使用してIFCファイルを表示するコード
+        // IFC.jsライブラリを使用してIFCファイルを表示する関数
         async function loadIFC(url) {
             const container = document.getElementById('viewer-container');
             const scene = new THREE.Scene();
@@ -31,6 +38,7 @@
             const light = new THREE.HemisphereLight(0xffffff, 0x080820, 1);
             scene.add(light);
 
+            // IFC.jsライブラリの使用例
             const loader = new IFCLoader();
             const model = await loader.loadAsync(url);
             scene.add(model);
@@ -45,8 +53,8 @@
             animate();
         }
 
-        // S3バケットのIFCファイルのURLを指定
-        const ifcURL = 'https://YOUR_BUCKET_NAME.s3.amazonaws.com/yourfile.ifc';
+        // IFCファイルのURLを指定してIFCモデルを読み込む
+        const ifcURL = 'https://iotw-bucket.s3.ap-southeast-2.amazonaws.com/kikaishitsu.ifc';
         loadIFC(ifcURL);
     </script>
 </body>
