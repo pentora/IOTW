@@ -27,9 +27,8 @@
 
     <!-- 自作のJavaScriptコードを追加 -->
     <script type="module">
-        import { IFCLoader } from 'web-ifc-viewer';
+        import { IFCLoader } from 'web-ifc-viewer'; // 正しいパスを確認する必要があります
 
-        // IFC.jsライブラリを使用してIFCファイルを表示する関数
         async function loadIFC(url) {
             const container = document.getElementById('viewer-container');
             const scene = new THREE.Scene();
@@ -41,8 +40,7 @@
             const light = new THREE.HemisphereLight(0xffffff, 0x080820, 1);
             scene.add(light);
 
-            // IFC.jsライブラリの使用例
-            const loader = new IFCLoader();
+            const loader = new IFCLoader(); // IFCLoaderを正しくインスタンス化
             const model = await loader.loadAsync(url);
             scene.add(model);
 
