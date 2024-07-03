@@ -21,11 +21,14 @@
 
     <!-- Three.jsライブラリのCDNを追加 -->
     <script src="https://unpkg.com/three@0.127.0/build/three.min.js"></script>
+
     <!-- IFC.jsライブラリのCDNを追加 -->
     <script src="https://cdn.jsdelivr.net/npm/web-ifc-viewer@1.0.218/dist/index.min.js"></script>
 
     <!-- 自作のJavaScriptコードを追加 -->
-    <script>
+    <script type="module">
+        import { IFCLoader } from 'web-ifc-viewer';
+
         // IFC.jsライブラリを使用してIFCファイルを表示する関数
         async function loadIFC(url) {
             const container = document.getElementById('viewer-container');
